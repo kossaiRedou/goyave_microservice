@@ -1,0 +1,59 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# === Environnement virtuel ===
+.venv/
+env/
+venv/
+ENV/
+
+# === Jupyter notebooks (sorties) ===
+.ipynb_checkpoints/
+
+# === Logs et données ===
+*.log
+*.sqlite3
+*.db
+data/
+models/
+*.pkl
+*.joblib
+*.csv
+
+# === Secrets ===
+.env
+*.key
+*.pem
+
+# === IDEs & OS ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# === Docker ===
+*.pid
+docker-compose.override.yml
+
+# === Tests et CI ===
+tests/
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# === Notebooks et scripts d'entraînement ===
+training/notebooks/
+training/*.ipynb
+
+# === GitHub workflows ===
+.github/
