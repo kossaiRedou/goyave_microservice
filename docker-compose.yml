@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: goyave_prediction
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app         # Synchronise le code local avec le conteneur
+      - ./training:/training   # (optionnel) synchronise aussi les scripts d'entraînement
+      - ./data:/data           # (optionnel) synchronise les données si besoin
+
+volumes:
+  postgres_data:
