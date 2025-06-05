@@ -3,18 +3,20 @@ version: '3.9'
 services:
   db:
     image: postgres:14
+    container_name: goyave_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: goyave_prediction
+      POSTGRES_USER: goyave
+      POSTGRES_PASSWORD: Postgres_goyave
+      POSTGRES_DB: prediction_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"  # Expose PostgreSQL sur le port 5433 de l’hôte
 
   api:
     build: .
+    container_name: prediction_api
     ports:
       - "8000:8000"
     depends_on:
@@ -22,9 +24,9 @@ services:
     env_file:
       - .env
     volumes:
-      - ./app:/app         # Synchronise le code local avec le conteneur
-      - ./training:/training   # (optionnel) synchronise aussi les scripts d'entraînement
-      - ./data:/data           # (optionnel) synchronise les données si besoin
+      - ./app:/app            # Code source FastAPI
+      - ./training:/training  # Scripts et notebooks ML
+      - ./data:/data          # Données (si besoin)
 
 volumes:
   postgres_data:
